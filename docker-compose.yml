@@ -1,0 +1,24 @@
+version: '3.5'
+services:
+  mysql:
+    build: ./mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: V!F@cqM@9!Ev^t*s
+      MYSQL_DATABASE: drupaldb
+      MYSQL_USER: drupaluser
+      MYSQL_PASSWORD: A$cHa2Hv!@+udxeW
+    expose:
+      - "3306"
+    volumes:
+      - /data/docker/data/drupal/db:/var/lib/mysql
+    restart: always
+  drupal:
+    build: ./drupal
+    ports:
+      - "8083:8080"
+      - "8084:6006"
+    depends_on:
+      - mysql
+    volumes:
+      - /data/docker/data/drupal/html:/var/www/html
+    restart: always
